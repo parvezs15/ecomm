@@ -2,28 +2,33 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
 from django.urls import path
+
 from . import views
-
-
 from .forms import LoginForm, MyPasswordResetForm, MyPasswordChangeForm, MySetPasswordForm
+from .views import create_teacher
+from .views import send_whatsapp_message
 
 urlpatterns = [
                   path("", views.home),
+                  path("home/", views.about, name="home"),
                   path("about/", views.about, name="about"),
+                  path('tutors-detail/', views.tutors_detail, name='tutors_detail'),
                   path("contact/", views.contact, name="contact"),
                   path("category/<slug:val>", views.CategoryView.as_view(), name="category"),
                   path("category-title/<val>", views.CategoryTitle.as_view(), name="product-detail"),
                   path("product-detail/<int:pk>", views.ProductDetail.as_view(), name="product-detail"),
                   path('profile/', views.ProfileView.as_view(), name='profile'),
+                  path('create_teacher/', create_teacher, name='create_teacher'),
                   path('address/', views.address, name='address'),
                   path('updateAddress/<int:pk>', views.updateAddress.as_view(), name="updateAddress"),
 
                   path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
                   path('cart/', views.show_cart, name='showcart'),
+                  path('wishlist/', views.show_wishlist, name='wishlist'),
                   path('checkout/', views.checkout.as_view(), name='checkout'),
+                  path('paymentdone/', views.payment_done, name='paymentdone'),
                   path('orders/', views.orders, name='orders'),
-
-                  path('search/', views.search,name='search'),
+                  path('search/', views.search, name='search'),
 
                   path('pluscart/', views.plus_cart),
                   path('minuscart/', views.minus_cart),
@@ -58,5 +63,11 @@ urlpatterns = [
                   path('password-reset-complete/',
                        auth_view.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'),
                        name='password_reset_complete'),
+
+                  path('send-whatsapp-message/', send_whatsapp_message, name='send_whatsapp_message'),
+
+
+                  path('tutors/', views.tutor_list, name='tutor_list'),
+
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

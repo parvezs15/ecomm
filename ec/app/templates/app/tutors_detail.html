@@ -1,16 +1,212 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Private Tutors - Details</title>
-    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+    <title>IQ Academic | {% block title %}Home{% endblock %} | IQ Group</title>
 </head>
+
 <body>
-    <div class="container">
-        <h1 class="text-center">Private Tutors - Details</h1>
-        <p>Here you can display detailed information about private tutors, their qualifications, subjects, and charges.</p>
-        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'app/images/banner/IQ.png' %}" width="110" height="80" alt="IQ Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Our Courses
+                            </a>
+                            <ul class="dropdown-menu">
+            <li><a class="dropdown-item"  href="{% url 'category' 'CM' %}">Online Computer Education</a> </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item"  href="{% url 'category' 'BD' %}">Online Big Data</a> </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item"  href="{% url 'category' 'DS' %}">Online Data Science</a> </li>
+             <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item"  href="{% url 'category' 'AI' %}">Online Artificial intelligence</a> </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item"  href="{% url 'category' 'SC' %}">Online Schooling</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item"  href="{% url 'category' 'TU' %}">Online Tuition</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item"  href="{% url 'category' 'OT' %}">Online Other Training</a></li>
+            <li><hr class="dropdown-divider"></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'about' %}">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'contact' %}">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'create_teacher' %}">Create Job Profile</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'send_whatsapp_message' %}">Send Message</a></li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'about' %}">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'contact' %}">Contact Us</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <form class="d-flex" role="search" action="/search">
+                    <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+                    <button class="btn btn-outline-info" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+
+
+<div class="container">
+    <h2 class="text-center">Private Tutors</h2>
+    <div class="row">
+        <!-- Course 1 -->
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Tutor TU">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/Maths2.jpg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Private Online Tutors</h3>
+                        <p class="card-description" style="color: #34495e;">Professional tutors to suit your budget. Have, record and pay for classes online.</p>
+                      <!-- Updated button -->
+                        <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;" onclick="window.location.href={% url 'tutors_detail' %}">Read More</button>
+
+                     </div>
+                </a>
+            </div>
+        </div>
+
+<!--
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Developer DP">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/developer.jpg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Developer</h3>
+                        <p class="card-description" style="color: #34495e;">A person or company that creates new products, especially computer products such as software, website.</p>
+                        <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Data Science DS">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/datascience.jpg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Data Science</h3>
+                        <p class="card-description" style="color: #34495e;">Data science is the study of data to extract meaningful insights for business.</p>
+                         <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
+
+    <div class="row">
+
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Data Analyst DA">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/dataanalyst.jpeg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Data Analyst</h3>
+                        <p class="card-description" style="color: #34495e;">A data analyst reviews data to identify key insights into a business's customers and ways the data can be used to solve problems.</p>
+                        <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Big Data BD">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/bigdata.jpeg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Big Data Hadoop</h3>
+                        <p class="card-description" style="color: #34495e;">Big data refers to extremely large and diverse collections of structured, unstructured, and semi-structured data that continues to grow exponentially over time.</p>
+                         <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Photographer PH">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/photographer.jpg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Photographer</h3>
+                        <p class="card-description" style="color: #34495e;">A photographer is a professional skilled in capturing images using a camera. They use their technical knowledge & creativity.</p>
+                        <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                   </div>
+                </a>
+            </div>
+        </div>
+-->
+    </div>
+</div>
+
+<a href="{% url 'home' %}" class="btn btn-primary" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Back to Home</a>
+-->
+    <!-- Main Content
+    {% block main-content %}
+    <div class="container my-5">
+        <h2 class="text-center">Private Tutors</h2>
+        <div class="row">
+            {% for tutor in tutors %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ tutor.name }}</h3>
+                        <p class="card-text"><strong>Biography:</strong> {{ tutor.biography }}</p>
+                        <p class="card-text"><strong>Subjects:</strong> {{ tutor.subjects }}</p>
+                        <p class="card-text"><strong>Charges:</strong> ${{ tutor.charges_per_hour }} per hour</p>
+                        <a href="{% url 'tutors_detail' tutor.id %}" class="btn btn-primary">Contact Tutor</a>
+
+                                <div class="col-sm-7">
+                <p>Product : {{op.product.title}}</p>
+                <p>Quantity : {{op.quantity}}</p>
+                <p>Price : {{op.total_cost}}</p>
+            </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock main-content %}
+-->
+    <!-- Footer -->
+    <footer class="container-fluid bg-success text-center p-2 mt-5 text-white">
+        All rights reserved by IQ Technology : 2024 || Develop by : IQ Technology || WhatsApp:+91 9545019716
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'app/js/myscript.js' %}"></script>
 </body>
 </html>

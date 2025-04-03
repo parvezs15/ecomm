@@ -1,18 +1,22 @@
+.card-button {
+    margin-bottom: 20px; /* Adds space below the button */
+}
 .goodnessseccont img{
     width:100%;
 }
 
 .computer{
-    background-color: #fff;background-image:linear-gradient(#fff7ef, #fff);
-    background-image:-webkit-linear-gradient(#effdff, #fff);
-    background-image:-moz-linear-gradient(#fff7ef, #fff);
-    background-image:-ms-linear-gradient(#fff7ef, #fff);
-    background-image:-o-linear-gradient(#fff7ef, #fff);
+    background-color: #fff;
+    background-image:linear-gradient(rgba(110, 69, 143, 0.1), #fff);
+    background-image:-webkit-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
+    background-image:-moz-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
+    background-image:-ms-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
+    background-image:-o-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
     border:1px solid #efe8e1;
     padding: 50px 40px 20px;
 }
 
-.computer{
+.developer{
     background-color: #fff;
     background-image:linear-gradient(rgba(110, 69, 143, 0.1), #fff);
     background-image:-webkit-linear-gradient(rgba(110, 69, 143, 0.1), #fff);
@@ -52,11 +56,9 @@
     background-image:-moz-linear-gradient(#fff7ef, #fff);
     background-image:-ms-linear-gradient(#fff7ef, #fff);
     background-image:-o-linear-gradient(#fff7ef, #fff);
-     border:1px solid #efe8e1;
+    border:1px solid #efe8e1;
     padding: 50px 40px 20px;
 }
-
-
 
 .schooling{
     background-color: #fff;
@@ -65,7 +67,18 @@
     background-image:-moz-linear-gradient(#fff7ef, #fff);
     background-image:-ms-linear-gradient(#fff7ef, #fff);
     background-image:-o-linear-gradient(#fff7ef, #fff);
-     border:1px solid #efe8e1;
+    border:1px solid #efe8e1;
+    padding: 50px 40px 20px;
+}
+
+.others{
+    background-color: #fff;
+    background-image:linear-gradient(#fff7ef, #fff);
+    background-image:-webkit-linear-gradient(#fff7ef, #fff);
+    background-image:-moz-linear-gradient(#fff7ef, #fff);
+    background-image:-ms-linear-gradient(#fff7ef, #fff);
+    background-image:-o-linear-gradient(#fff7ef, #fff);
+    border:1px solid #efe8e1;
     padding: 50px 40px 20px;
 }
 

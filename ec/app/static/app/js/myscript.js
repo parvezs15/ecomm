@@ -14,8 +14,8 @@ $('.plus-cart').click(function()
           {
                 console.log("data = ",data);
                 eml.innerText=data.quantity
-                document.getElementById("amount").innerText=data.amount
-                document.fetElementById("totalamount").innerText=data.totalamount
+                document.getElementById("amount").innerText = data.amount;
+                document.getElementById("totalamount").innerText = data.totalamount;
           }
     })
 })
@@ -31,8 +31,8 @@ $('.minus-cart').click(function(){
           },
           success:function(data){
                 eml.innerText=data.quantity
-                document.getElementById("amount").innerText=data.amount
-                document.fetElementById("totalamount").innerText=data.totalamount
+                document.getElementById("amount").innerText = data.amount;
+                document.getElementById("totalamount").innerText = data.totalamount;
           }
           })
     }
@@ -50,7 +50,7 @@ $('.remove-cart').click(function(){
           },
           success:function(data){
                 eml.innerText=data.quantity
-                document.getElementById("amount").innerText=data.amount
+                document.getElementById("totalamount").innerText=data.amount
                 eml.parentNode.parentNode.parentNode.parentNode.remove()
           }
     })
@@ -68,8 +68,9 @@ $('.plus-wishlist').click(function(){
           },
           success:function(data)
           {
-            //alert(data.message)
-            //window.location.href = 'http://localhost:8000/product-detail/${id}'
+  eml.innerText=data.quantity
+                document.getElementById("totalamount").innerText=data.amount
+                eml.parentNode.parentNode.parentNode.parentNode.remove()
           }
     })
 })
@@ -86,8 +87,9 @@ $('.minus-wishlist').click(function()
           },
           success:function(data)
           {
-            //alert(data.message)
-            //window.location.href = "http://localhost:8000/product-detail/${id}"
+            alert(data.message)
+            window.location.href = "http://localhost:8000/product-detail/${id}"
           }
     })
 })
+

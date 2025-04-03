@@ -1,16 +1,19 @@
+import razorpay
+# filepath: d:\copy-06-07-2024\Parvez\ecomm\ec\app\views.py
+import requests
+from django.conf import settings
+from django.contrib import messages  # Correct import for messages framework
 from django.core.checks import messages
 from django.db.models import Count
 from django.db.models import Q
 from django.http import JsonResponse
-from django.shortcuts import redirect
-from django.shortcuts import render
 from django.views import View
 from django.contrib import messages
-from .forms import CustomerRegistrationForm, CustomerProfileForm
-from .models import Product, Customer, Cart, Wishlist, OrderPlaced
-from typing_extensions import ParamSpecKwargs
-from django.shortcuts import render
-from django.http import HttpResponse
+
+from .forms import CustomerProfileForm
+from .forms import CustomerRegistrationForm
+from .models import Cart, Wishlist, Customer
+from .models import Product, OrderPlaced, Payment
 
 
 # Create your views here.
@@ -181,8 +184,19 @@ def show_cart(request):
         totalitem = len(Cart.objects.filter(user=request.user))
     return render(request, 'app/addtocart.html', locals())
 
+
 class checkout(View):
     def get(self, request):
+        global payment
+        user = request.user
+        add = Customer.objects.filter(user=user)
+        cart_items = Cart.objects.filter(user=user)
+        famount = 0
+        for p in cart_items:
+            value = p.quantity * p.product.discount_price
+            famount = famount + value
+        totalamount = famount + 40
+        razoramount = int(totalamount + 100)
         totalitem = 0
         wishitem = 0
         if request.user.is_authenticated:
@@ -196,15 +210,50 @@ class checkout(View):
                 famount = famount + value
             totalamount = famount + 40
             razoramount = int(totalamount * 100)
-#            client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
-#            data = {"amount": razoramount, "currency": "INR", "receipt": "order_rcptid_12"}
-#            payment_response = client.order.create(data=data)
-#           print(payment_response)
+            client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+            data = {"amount": razoramount, "currency": "INR", "receipt": "order_rcptid_12"}
+            payment_response = client.order.create(data=data)
+            print(payment_response)
+
+            order_id = payment_response['id']
+            order_status = payment_response['status']
+            if order_status == 'created':
+                payment = Payment(
+                    user=user,
+                    amount=totalamount,
+                    razorpay_order_id=order_id,
+                    razorpay_payment_status=order_status
+                )
+            payment.save()
             return render(request, 'app/checkout.html', locals())
 
+
+class OrederPlaced:
+    def save(self):
+        pass
+
+
+def payment_done(request):
+    order_id = request.GET.get('order_id')
+    payment_id = request.GET.get('payment_id')
+    cust_id = request.GET.get('cust_id')
+    user = request.user
+    customer = Customer.objects.get(id=cust_id)
+    payment = Payment.objects.get(razorpay_order_id=order_id)
+    payment.paid = True
+    payment.razorpay_payment_id = payment_id
+    payment.save()
+    cart = Cart.objects.filter(user=user)
+    for c in cart:
+        OrederPlaced(user=user, customer=customer, product=c.product, quantity=c.quantity, payment=payment).save()
+        c.delete()
+    return render(request, 'app/orders.html', locals())
+
+
 def orders(request):
-        order_placed = OrderPlaced.objects.filter(user=request.user)
-        return render(request, 'app/orders.html', locals())
+    order_placed = OrderPlaced.objects.filter(user=request.user)
+    return render(request, 'app/orders.html', locals())
+
 
 def plus_cart(request):
     if request.method == 'GET':
@@ -300,3 +349,84 @@ def search(request):
         wishitem = len(Wishlist.objects.filter(user=request.user))
     product = Product.objects.filter(Q(title__icontains=query))
     return render(request, "app/search.html", locals())
+
+
+def create_teacher(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            form = TeacherForm()  # Reinitialize form to clear fields
+    else:
+        form = TeacherForm()
+    return render(request, 'app/create_teacher.html', {'form': form})
+
+
+def send_whatsapp_message(request):
+    if request.method == 'POST':
+        phone_number = request.POST.get('phone_number')
+        message = request.POST.get('message')
+
+        url = 'https://api.whatsapp.com/send'
+        params = {
+            'phone': phone_number,
+            'text': message
+        }
+
+        response = requests.get(url, params=params)
+
+        if response.status_code == 200:
+            return JsonResponse({'status': 'success', 'message': 'Message sent successfully'})
+
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Failed to send message'})
+    return render(request, 'app/whatsup.html')
+
+
+def show_wishlist(request):
+    wishlist_items = Wishlist.objects.filter(user=request.user)
+    context = {
+        'wishlist_items': wishlist_items,
+    }
+    return render(request, 'app/wishlist.html', context)
+
+
+from .models import Tutor
+
+
+def tutor_list(request):
+    tutors = Tutor.objects.all()  # Fetch all tutors
+    return render(request, 'app/tutors.html', {'tutors': tutors})
+
+
+def tutors_detail(request):
+    return render(request, 'app/tutors_detail.html')
+
+
+def teacher(request):
+    return render(request, 'app/create_teacher.html')
+
+from .models import TeacherList
+
+def teacher_list(request):
+    teachers = TeacherList.objects.all()  # Fetch all teacher profiles
+    return render(request, 'app/teacher_list.html', {'teachers': teachers})
+
+
+from django.shortcuts import render, redirect
+from .forms import TeacherForm
+from .models import Teacher
+
+def add_teacher(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('teacher_list')  # Redirect to the list of teachers
+    else:
+        form = TeacherForm()
+    return render(request, 'add_teacher.html', {'form': form})
+
+def teacher_lst(request):
+    teachers = Teacher.objects.all()  # Fetch all teacher profiles
+    return render(request, 'teacher_list.html', {'teachers': teachers})

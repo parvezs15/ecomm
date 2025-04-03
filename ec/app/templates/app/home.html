@@ -1,4 +1,4 @@
-   {% extends 'app/base.html' %}
+{% extends 'app/base.html' %}
     {% load static %}
     {% block title %}Home{% endblock title %}
 
@@ -16,87 +16,111 @@
             </div>
         </div>
     </div>
-    {% endblock banner-slider %}
+{% endblock banner-slider %}
 {% block information %}
-    <div class="container">
-       <div class="row bg-success text-center p-5 text-white border-bottom shadow">
+    <div style="background-color: #3498db; color: #fff; class=container" >
+       <div class="row bg-success text-center p-5 text-white border-bottom shadow" >
            <h1>"Cultivating Minds Through Education"</h1>
            <small class="fs-5">
-               Embark on a transformative journey with IQ Academic to unlock the boundless potential
+               Embark on a transformative online journey with IQ Academic to unlock the boundless potential
                of education. Join our community dedicated to nurturing intellects, fostering
                creativity, and empowering tomorrow’s leaders to thrive in an ever-changing world.
+
            </small>
        </div>
    </div>
 {% endblock information %}
 
 {% block main-content %}
-    <div class="container">
-        <h2 class="text-center"> ALL COURSES </h2>
-   <div class="row container">
-        <div class="col-md-4 co-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
-             data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
-             animation-name: none;">
-                <div class="goodnesssec Computer CM">
-                   <a href="#">
-                       <div class="goodnessseccont text-center">
-                           <img src="{% static 'app/images/product/cmb1.png' %}" class="img-responsive" alt="">
-                           <p class="computer">Computer</p>
-                       </div>
-                   </a>
-                </div>
-       </div>
-       <div class="col-md-4 co-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
-             data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
-             animation-name: none;">
-                <div class="goodnesssec DataScience DS">
-                   <a href="#">
-                       <div class="goodnessseccont text-center">
-                           <img src="{% static 'app/images/product/dan1.png' %}" class="img-responsive" alt="">
-                           <p class="datascience">DataScience</p>
-                       </div>
-                   </a>
-                </div>
-       </div>
-       <div class="col-md-4 co-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
-             data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
-             animation-name: none;">
-                <div class="goodnesssec BigData BG">
-                   <a href="#">
-                       <div class="goodnessseccont text-center">
-                           <img src="{% static 'app/images/product/bgd1.png' %}" class="img-responsive" alt="">
-                           <p class="bigdata">BigData</p>
-                       </div>
-                   </a>
-                </div>
-           <br><br>
-       </div>
-        <div class="col-md-4 co-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
-             data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
-             animation-name: none;">
-                <div class="goodnesssec Tuition TU">
-                   <a href="#">
-                       <div class="goodnessseccont text-center">
-                           <img src="{% static 'app/images/product/dan1.png' %}" class="img-responsive" alt="">
-                           <p class="tuition">Tuition</p>
-                       </div>
-                   </a>
-                </div>
-           <br><br>
+<div class="container">
+    <h2 class="text-center">ALL COURSES</h2>
+    <div class="row">
+        <!-- Course 1 -->
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Tutor TU">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                       <img src="{% static 'app/images/product/datascience.jpg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Data Science</h3>
+                        <p class="card-description" style="color: #34495e;">Data science is the study of data to extract meaningful insights for business.</p>
+                     <!-- Updated button -->
+                        <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;" onclick="window.location.href={% url 'tutors_detail' %}">Read More</button>
+                     </div>
+                </a>
+            </div>
         </div>
-       <div class="col-md-4 co-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
-             data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
-             animation-name: none;">
-                <div class="goodnesssec Schooling SC">
-                   <a href="#">
-                       <div class="goodnessseccont text-center">
-                           <img src="{% static 'app/images/product/dan1.png' %}" class="img-responsive" alt="">
-                           <p class="schooling">Schooling</p>
-                       </div>
-                   </a>
-                </div>
-           <br><br>
+
+        <!-- Course 2 -->
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Developer DP">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/developer.jpg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Developer</h3>
+                        <p class="card-description" style="color: #34495e;">A person or company that creates new products, especially computer products such as software, website.</p>
+                        <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                    </div>
+                </a>
+            </div>
         </div>
-   </div>
-   </div>
+
+        <!-- Course 3 -->
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Data Science DS">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/AI-2.jpg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Artificial Intelligence</h3>
+                        <p class="card-description" style="color: #34495e;">AI systems can enhance user experience by personalizing interactions and content delivery on digital platforms.</p>
+                         <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Course 4 -->
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Data Analyst DA">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/dataanalyst.jpeg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Data Analyst</h3>
+                        <p class="card-description" style="color: #34495e;">A data analyst reviews data to identify key insights into a business's customers and ways the data can be used to solve problems.</p>
+                        <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Course 5 -->
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Big Data BD">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/bigdata.jpeg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Big Data Hadoop</h3>
+                        <p class="card-description" style="color: #34495e;">Big data refers to extremely large and diverse collections of structured, unstructured, and semi-structured data that continues to grow exponentially over time.</p>
+                         <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;">Read More</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+         <!-- Course 6 -->
+        <div class="col-md-4 col-sm-6 mi-go wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="goodnesssec Big Data BD">
+                <a href="#">
+                    <div class="goodnessseccont text-center">
+                        <img src="{% static 'app/images/product/tutor.jpeg' %}" class="img-responsive" alt="">
+                        <h3 class="card-title" style="color: #2c3e50;">Private Online Tutors</h3>
+                        <p class="card-description" style="color: #34495e;">Professional tutors to suit your budget. Have, record and pay for classes online.</p>
+                        <button class="card-button" style="background-color: #3498db; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; margin-bottom: 80px;" onclick="window.location.href={% url 'tutors_detail' %}">Read More</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock main-content %}

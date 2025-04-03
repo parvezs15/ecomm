@@ -1,9 +1,10 @@
-from django.core.management.base import BaseCommand
-from app.models import Teacher  # Replace 'app' with your app name
+import django.core.management.base
 from faker import Faker
-import random
 
-class Command(BaseCommand):
+from app.models import Teacher  # Replace 'app' with your app name
+
+
+class Command(django.core.management.base.BaseCommand):
     help = 'Insert fake data into the Teacher model'
 
     def handle(self, *args, **kwargs):

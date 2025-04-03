@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<!-- filepath: d:\copy-06-07-2024\Parvez\ecomm\ec\app\templates\app\send_whatsapp_message.html -->
+{% extends 'app/base.html' %}
+{% block title %}Send WhatsApp Message{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <h3>Send Message</h3>
+    <form method="post" action="{% url 'send_whatsapp_message' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="phone_number" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+
+</div>
+{% endblock main-content %}

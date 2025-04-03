@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'app',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE: list[str] = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -127,5 +127,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-RAZOR_KEY_ID = "rzp_test_2TUHCJnGDCobwu"
-RAZOR_KEY_SECRET = "Hk6ay2FD9VpJqGUljissFWLN"
+RAZOR_KEY_ID = "rzp_test_MbW86GoQWB4slf"
+RAZOR_KEY_SECRET = "Eepfy8vhR8u5Il9XcLPbVLVz"
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
