@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Profiles</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Tutor Profiles</h1>
+        <div class="row">
+            {% for tutor in tutors %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ tutor.profile_picture.url }}" alt="{{ tutor.name }}" style="max-height: 200px;">
+                    <div class="card-body">
+                        <h3>{{ tutor.name }}</h3>
+                        <p><strong>Email:</strong> {{ tutor.email }}</p>
+                        <p><strong>Phone:</strong> {{ tutor.phone }}</p>
+                        <p><strong>Biography:</strong> {{ tutor.biography }}</p>
+                        <p><strong>Subjects:</strong> {{ tutor.subjects }}</p>
+                        <p><strong>Charges:</strong> ${{ tutor.charges_per_hour }} per hour</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
